@@ -16,14 +16,14 @@ module GYRUSS_MAIN
 	input	  [7:0]		DSW1,
 	input	  [7:0]		DSW2,
 
-	input					BGCL,
+	input				BGCL,
 	input   [9:0]		BGVA,
 	output [15:0]		BGVD,
 
-	input					SHCL,
+	input				SHCL,
 	input  [10:0]		SHMA,
 	output  [7:0]		SHMD,
-	input					SHMW,
+	input				SHMW,
 	input   [7:0]		SHWD,
 
 	output 				FLPV,
@@ -31,10 +31,10 @@ module GYRUSS_MAIN
 	output 				SNDRQ,
 	output reg  [7:0]	SNDNO = 0,
 	
-	input					ROMCL,
+	input				ROMCL,
 	input  [16:0]		ROMAD,
 	input	 [7:0]		ROMID,
-	input	 				ROMEN
+	input	 			ROMEN
 );
 
 reg [3:0] clkdiv;
@@ -152,14 +152,14 @@ endmodule
 
 module MAINROM
 (
-	input				CL,
+	input		    CL,
 	input [14:0]	AD,
 	output [7:0]	DT,
 
-	input				ROMCL,
+	input			ROMCL,
 	input [16:0]	ROMAD,
 	input	 [7:0]	ROMDT,
-	input	 			ROMEN
+	input	 		ROMEN
 );
 
 

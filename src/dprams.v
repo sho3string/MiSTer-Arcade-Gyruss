@@ -1,5 +1,5 @@
 
-module DLROM #(parameter AW,parameter DW)
+module DLROM #(parameter AW=0,parameter DW=0)
 (
 	input							CL0,
 	input [(AW-1):0]			AD0,
@@ -14,7 +14,7 @@ module DLROM #(parameter AW,parameter DW)
 reg [(DW-1):0] core[0:((2**AW)-1)] /* synthesis ramstyle = "no_rw_check, M10K" */;
 
 always @(posedge CL0) DO0 <= core[AD0];
-always @(posedge CL1) if (WE1) core[AD1] <= DI1;
+always @(negedge CL1) if (WE1) core[AD1] <= DI1;
 
 endmodule
 
@@ -37,7 +37,7 @@ module LBUF1024_8
 wire       re0 = 1'b0;
 wire [7:0] dt0;
 
-DPRAM1024 core
+/*DPRAM1024 core
 (
 	AD0,AD1,
 	CL0,CL1,
@@ -45,7 +45,7 @@ DPRAM1024 core
 	re0,RE1,
 	WE0,WE1,
 	dt0,DT1
-);
+);*/
 
 endmodule
 

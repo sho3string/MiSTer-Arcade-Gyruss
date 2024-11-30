@@ -1,7 +1,7 @@
 // FPGA Gyruss
 // Copyright (c) 2020 MiSTer-X
 
-module FPGA_GYRUSS
+module fpga_gyruss
 (
 	input				MCLK,
 	input				SCLK,
@@ -23,10 +23,10 @@ module FPGA_GYRUSS
 	output [15:0]	SND_L,
 	output [15:0]	SND_R,
 
-	input				ROMCL,
-	input  [16:0]	ROMAD,
+	input			ROMCL,
+	input    [16:0]	ROMAD,
 	input	 [7:0]	ROMDT,
-	input	 			ROMEN
+	input	 		ROMEN
 );
 
 wire			SPCL;
