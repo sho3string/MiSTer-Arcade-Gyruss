@@ -34,7 +34,7 @@ module LBUF1024_8
 	output [7:0]	DT1
 );
 
-wire       re0 = 1'b0;
+wire re0 = 1'b0;
 wire [7:0] dt0;
 
 /*DPRAM1024 core
@@ -47,8 +47,55 @@ wire [7:0] dt0;
 	dt0,DT1
 );*/
 
-endmodule
+// Simulating byte enable functionality with write enable logic 
+wire [0:0] byteena_a = 1'b1;
+wire [0:0] byteena_b = 1'b1;
 
+// Xilinx dual-port RAM instance
+xpm_memory_tdpram #(
+    .MEMORY_SIZE        (8192),        // Memory size in bits / 8 = 1024 words
+    .MEMORY_PRIMITIVE   ("auto"),
+    .CLOCKING_MODE      ("independent_clock"),
+    .MEMORY_INIT_FILE   ("none"),
+    .MEMORY_INIT_PARAM  ("0"),
+    .USE_MEM_INIT       (1),
+    .WAKEUP_TIME        ("disable_sleep"),
+    .MESSAGE_CONTROL    (0),
+    .ECC_MODE           ("no_ecc"),
+    .AUTO_SLEEP_TIME    (0),
+    .WRITE_DATA_WIDTH_A (8),
+    .READ_DATA_WIDTH_A  (8),
+    .BYTE_WRITE_WIDTH_A (8),
+    .ADDR_WIDTH_A       (10),
+    .READ_RESET_VALUE_A ("0"),
+    .READ_LATENCY_A     (1),
+    .WRITE_MODE_A       ("write_first"),
+    .WRITE_DATA_WIDTH_B (8),
+    .READ_DATA_WIDTH_B  (8),
+    .BYTE_WRITE_WIDTH_B (8),
+    .ADDR_WIDTH_B       (10),
+    .READ_RESET_VALUE_B ("0"),
+    .READ_LATENCY_B     (1),
+    .WRITE_MODE_B       ("write_first")
+) core (
+    .clka       (CL0),
+    .rsta       (1'b0),
+    .ena        (1'b1),
+    .wea        (WE0 & byteena_a),
+    .addra      (AD0),
+    .dina       (WD0),
+    .douta      (dt0),
+    .clkb       (CL1),
+    .rstb       (1'b0),
+    .enb        (1'b1),
+    .web        (WE1 & byteena_b),
+    .addrb      (AD1),
+    .dinb       (WD1),
+    .doutb      (DT1)
+);
+
+
+endmodule
 
 module DPRAM #(AW=8,DW=8)
 (
