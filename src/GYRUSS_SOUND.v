@@ -103,12 +103,12 @@ endmodule
    Clock Generator
      in: 49151993Hz -> out: 3579545Hz
 */
-module sclkgen( input in, output reg out );
+module sclkgen( input clk_in, output reg clk_out );
 reg [8:0] count;
-always @( posedge in ) begin
+always @( posedge clk_in ) begin
         if (count > 9'd393) begin
                 count <= count - 9'd393;
-                out <= ~out;
+                clk_out <= ~clk_out;
         end
         else count <= count + 9'd67;
 end
