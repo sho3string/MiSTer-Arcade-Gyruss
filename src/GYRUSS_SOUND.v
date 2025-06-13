@@ -15,7 +15,15 @@ module GYRUSS_SOUND
 	input				ROMCL,
 	input  [16:0]	ROMAD,
 	input	 [7:0]	ROMID,
-	input	 			ROMEN
+	input	 			ROMEN,
+	
+	// Mute controls for testing 
+	input mute_p0, 
+	input mute_p1, 
+	input mute_p2, 
+	input mute_p3, 
+	input mute_p4,
+	input mute_dac
 );
 
 wire [15:0] CPUAD;
@@ -75,7 +83,14 @@ GYRUSS_SNDGEN sgen(
 	CPUCL,CPUIW,CPUIR,CPUAD,CPUOD,
 	sgncs,sgndt,
 	DACO,
-	SND_L,SND_R
+	SND_L,SND_R,
+	// Mute controls for testing 
+	mute_p0, 
+	mute_p1, 
+	mute_p2, 
+	mute_p3, 
+	mute_p4,
+	mute_dac
 );
 
 
@@ -178,7 +193,15 @@ module GYRUSS_SNDGEN
 	output reg [15:0]	SND_L,
 	output reg [15:0]	SND_R,
 	
-	output reg [7:0]	TIMER
+	output reg [7:0]	TIMER,
+	
+	// Mute controls for testing 
+	input mute_p0, 
+	input mute_p1, 
+	input mute_p2, 
+	input mute_p3, 
+	input mute_p4,
+	input mute_dac
 );
 
 function [3:0] timerd(input [3:0] no);

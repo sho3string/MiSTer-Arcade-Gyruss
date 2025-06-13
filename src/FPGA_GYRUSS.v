@@ -85,6 +85,7 @@ GYRUSS_SOUND sound(
 	SND_L,SND_R,
 
 	ROMCL,ROMAD,ROMDT,ROMEN
+
 );
 
 endmodule
